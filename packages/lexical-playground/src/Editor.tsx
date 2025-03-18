@@ -75,6 +75,7 @@ import TreeViewPlugin from './plugins/TreeViewPlugin';
 import TwitterPlugin from './plugins/TwitterPlugin';
 import YouTubePlugin from './plugins/YouTubePlugin';
 import ContentEditable from './ui/ContentEditable';
+import CustomTagPlugin from './plugins/CustomTagPlugin';
 
 const skipCollaborationInit =
   // @ts-expect-error
@@ -115,6 +116,7 @@ export default function Editor(): JSX.Element {
   const [editor] = useLexicalComposerContext();
   const [activeEditor, setActiveEditor] = useState(editor);
   const [isLinkEditMode, setIsLinkEditMode] = useState<boolean>(false);
+  const [isEditMode, setIsEditMode] = useState<boolean>(false);
 
   const onRef = (_floatingAnchorElem: HTMLDivElement) => {
     if (_floatingAnchorElem !== null) {
@@ -234,8 +236,14 @@ export default function Editor(): JSX.Element {
                   anchorElem={floatingAnchorElem}
                   cellMerge={true}
                 />
+                <CustomTagPlugin
+                  anchorElem={floatingAnchorElem}
+                  isEditMode={isEditMode}
+                  setIsEditMode={setIsEditMode}
+                />
               </>
             )}
+
             {floatingAnchorElem && !isSmallWidthViewport && (
               <>
                 <DraggableBlockPlugin anchorElem={floatingAnchorElem} />
@@ -244,6 +252,7 @@ export default function Editor(): JSX.Element {
                 <FloatingTextFormatToolbarPlugin
                   anchorElem={floatingAnchorElem}
                   setIsLinkEditMode={setIsLinkEditMode}
+                  setIsEditMode={setIsEditMode}
                 />
               </>
             )}

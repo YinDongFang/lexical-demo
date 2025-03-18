@@ -49,6 +49,7 @@ function TextFormatFloatingToolbar({
   isSubscript,
   isSuperscript,
   setIsLinkEditMode,
+  setIsEditMode,
 }: {
   editor: LexicalEditor;
   anchorElem: HTMLElement;
@@ -64,6 +65,7 @@ function TextFormatFloatingToolbar({
   isSuperscript: boolean;
   isUnderline: boolean;
   setIsLinkEditMode: Dispatch<boolean>;
+  setIsEditMode: Dispatch<boolean>;
 }): JSX.Element {
   const popupCharStylesEditorRef = useRef<HTMLDivElement | null>(null);
 
@@ -303,6 +305,12 @@ function TextFormatFloatingToolbar({
             aria-label="Insert link">
             <i className="format link" />
           </button>
+          <button
+            type="button"
+            className={'popup-item spaced'}
+            onClick={() => setIsEditMode(true)}>
+            add tag
+          </button>
         </>
       )}
       <button
@@ -321,6 +329,7 @@ function useFloatingTextFormatToolbar(
   editor: LexicalEditor,
   anchorElem: HTMLElement,
   setIsLinkEditMode: Dispatch<boolean>,
+  setIsEditMode: Dispatch<boolean>,
 ): JSX.Element | null {
   const [isText, setIsText] = useState(false);
   const [isLink, setIsLink] = useState(false);
@@ -438,6 +447,7 @@ function useFloatingTextFormatToolbar(
       isUnderline={isUnderline}
       isCode={isCode}
       setIsLinkEditMode={setIsLinkEditMode}
+      setIsEditMode={setIsEditMode}
     />,
     anchorElem,
   );
@@ -446,10 +456,17 @@ function useFloatingTextFormatToolbar(
 export default function FloatingTextFormatToolbarPlugin({
   anchorElem = document.body,
   setIsLinkEditMode,
+  setIsEditMode,
 }: {
   anchorElem?: HTMLElement;
   setIsLinkEditMode: Dispatch<boolean>;
+  setIsEditMode: Dispatch<boolean>;
 }): JSX.Element | null {
   const [editor] = useLexicalComposerContext();
-  return useFloatingTextFormatToolbar(editor, anchorElem, setIsLinkEditMode);
+  return useFloatingTextFormatToolbar(
+    editor,
+    anchorElem,
+    setIsLinkEditMode,
+    setIsEditMode,
+  );
 }

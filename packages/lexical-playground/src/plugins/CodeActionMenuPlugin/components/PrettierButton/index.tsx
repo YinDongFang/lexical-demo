@@ -23,12 +23,10 @@ const PRETTIER_PARSER_MODULES = {
   html: [() => import('prettier/parser-html')],
   js: [
     () => import('prettier/parser-babel'),
-    () => import('prettier/plugins/estree'),
   ],
   markdown: [() => import('prettier/parser-markdown')],
   typescript: [
     () => import('prettier/parser-typescript'),
-    () => import('prettier/plugins/estree'),
   ],
 } as const;
 
