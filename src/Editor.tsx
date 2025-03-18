@@ -18,7 +18,7 @@ import {
 } from "lexical";
 import ExampleTheme from "./Theme";
 import ToolbarPlugin from "./plugins/ToolbarPlugin";
-import TreeViewPlugin from "./plugins/TreeviewPlugin";
+import TreeViewPlugin from "./plugins/TreeViewPlugin";
 import { parseAllowedColor, parseAllowedFontSize } from "./styleConfig";
 import "./styles.css";
 
